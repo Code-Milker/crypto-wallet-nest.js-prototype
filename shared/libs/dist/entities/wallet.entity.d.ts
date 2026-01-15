@@ -3,6 +3,6 @@ export declare class Wallet {
     id: number;
     user: User;
     publicAddress: string;
-    encryptedPrivateKey: string;
+    encryptedPrivateKey: string | null;
     createdAt: Date;
 }
