@@ -1,4 +1,4 @@
-import { Wallet } from './wallet.entity';
+import { Wallet } from "./wallet.entity";
 export declare class Signature {
     id: number;
     wallet: Wallet;

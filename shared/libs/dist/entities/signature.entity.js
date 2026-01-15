@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Signature.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => wallet_entity_1.Wallet, wallet => wallet.id),
+    (0, typeorm_1.ManyToOne)(() => wallet_entity_1.Wallet, (wallet) => wallet.id),
     __metadata("design:type", wallet_entity_1.Wallet)
 ], Signature.prototype, "wallet", void 0);
 __decorate([
@@ -32,10 +32,10 @@ __decorate([
     __metadata("design:type", String)
 ], Signature.prototype, "signature", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Signature.prototype, "createdAt", void 0);
 exports.Signature = Signature = __decorate([
-    (0, typeorm_1.Entity)('signatures')
+    (0, typeorm_1.Entity)("signatures")
 ], Signature);
 //# sourceMappingURL=signature.entity.js.map

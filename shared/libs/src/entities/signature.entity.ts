@@ -1,12 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Wallet } from './wallet.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Wallet } from "./wallet.entity";
 
-@Entity('signatures')
+@Entity("signatures")
 export class Signature {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Wallet, wallet => wallet.id)
+  @ManyToOne(() => Wallet, (wallet) => wallet.id)
   wallet: Wallet;
 
   @Column()
@@ -15,6 +15,6 @@ export class Signature {
   @Column()
   signature: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;
 }
