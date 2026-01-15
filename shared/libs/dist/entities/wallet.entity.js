@@ -32,7 +32,7 @@ __decorate([
     __metadata("design:type", String)
 ], Wallet.prototype, "encryptedPrivateKey", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Wallet.prototype, "createdAt", void 0);
 exports.Wallet = Wallet = __decorate([

@@ -15,6 +15,6 @@ export class Wallet {
   @Column()
   encryptedPrivateKey: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }) // Change to 'datetime'
   createdAt: Date;
 }
