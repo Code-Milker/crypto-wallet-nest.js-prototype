@@ -13,7 +13,7 @@ exports.JwtStrategy = void 0;
 const passport_jwt_1 = require("passport-jwt");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
-const libs_1 = require("../../../../shared/libs/dist/index.d.ts");
+const libs_1 = require("@shared/libs");
 let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
     constructor() {
         super({

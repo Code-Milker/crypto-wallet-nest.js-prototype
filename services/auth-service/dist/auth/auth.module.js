@@ -11,12 +11,12 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const libs_1 = require("../../../../shared/libs/dist/index.d.ts");
+const libs_1 = require("@shared/libs");
 const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
 const local_strategy_1 = require("./local.strategy");
 const jwt_strategy_1 = require("./jwt.strategy");
-const libs_2 = require("../../../../shared/libs/dist/index.d.ts");
+const libs_2 = require("@shared/libs");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;

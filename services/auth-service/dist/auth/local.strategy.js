@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocalStrategy = void 0;
 const passport_local_1 = require("passport-local");
@@ -32,6 +31,6 @@ let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)
 exports.LocalStrategy = LocalStrategy;
 exports.LocalStrategy = LocalStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], LocalStrategy);
 //# sourceMappingURL=local.strategy.js.map
