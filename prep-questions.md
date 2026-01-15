@@ -109,3 +109,8 @@ Add DB setup with TypeORM (configure SQLite in app.module.ts).
 Integrate crypto libs and secure storage.
 Add tests (unit/integration) with Jest.
 Run locally: Start each service with separate terminals or a script (e.g., concurrently npm package).
+
+
+# what is rabbit mq?
+its a open source message broker that facilitates communication between applications in distributed systems. it acts as an intermediary, which allows producers (senders) to publish messages to queues, and consumers (receivers) to subscribe and process those messages asynchronously. 
+

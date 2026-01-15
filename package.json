@@ -12,7 +12,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@nestjs/microservices": "^11.1.12",
     "@types/node": "^25.0.9",
+    "kafkajs": "^2.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
