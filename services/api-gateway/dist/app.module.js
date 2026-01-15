@@ -10,14 +10,30 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const config_1 = require("@nestjs/config");
+const axios_1 = require("@nestjs/axios");
+const passport_1 = require("@nestjs/passport");
+const jwt_1 = require("@nestjs/jwt");
+const libs_1 = require("@shared/libs");
+const jwt_strategy_1 = require("./auth/jwt.strategy");
+const api_gateway_module_1 = require("./api-gateway/api-gateway.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            axios_1.HttpModule,
+            passport_1.PassportModule,
+            jwt_1.JwtModule.register({
+                secret: libs_1.jwtConstants.secret,
+                signOptions: { expiresIn: '60m' },
+            }),
+            api_gateway_module_1.ApiGatewayModule,
+        ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, jwt_strategy_1.JwtStrategy],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
