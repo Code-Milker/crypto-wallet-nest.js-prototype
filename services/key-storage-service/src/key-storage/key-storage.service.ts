@@ -21,6 +21,6 @@ export class KeyStorageService {
     const wallet = await this.walletsRepository.findOne({
       where: { id: walletId },
     });
-    return wallet?.encryptedPrivateKey;
+    return wallet?.encryptedPrivateKey ?? undefined;
   }
 }

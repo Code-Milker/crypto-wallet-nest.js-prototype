@@ -10,7 +10,6 @@ import {
   signMessage,
   Signature,
 } from '@shared/libs';
-
 @Injectable()
 export class SigningService {
   constructor(
@@ -19,7 +18,6 @@ export class SigningService {
     private httpService: HttpService,
     private configService: ConfigService,
   ) {}
-
   async sign(walletId: number, dto: SignMessageDto): Promise<string> {
     // Retrieve encrypted key from Key Storage
     const keyStorageUrl = this.configService.get('KEY_STORAGE_URL');
@@ -27,20 +25,14 @@ export class SigningService {
       this.httpService.get(`${keyStorageUrl}/${walletId}`),
     );
     const encryptedPrivateKey = response.data.encryptedPrivateKey;
-
     if (!encryptedPrivateKey) {
       throw new Error('Key not found');
     }
-
     // Decrypt in-memory
     const privateKey = decryptPrivateKey(encryptedPrivateKey);
-
     // Sign (ensure sync call)
-
     // ... rest of method
-
     const signature = await signMessage(privateKey, dto.message); // Ensure this is sync; await if async
-
     const messageHash = dto.message; // Or hash it
     const audit = this.signaturesRepository.create({
       wallet: { id: walletId },
@@ -48,9 +40,7 @@ export class SigningService {
       signature,
     });
     await this.signaturesRepository.save(audit);
-
     // ...
-
     return signature;
   }
 }

@@ -10,12 +10,12 @@ export class WalletController {
   // @UseGuards(AuthGuard('jwt'))  // Secure with JWT from Auth Service
   async create(@Param('userId') userId: number) {
     // In real app, get userId from req.user
-    return this.walletService.create(userId);
+    return this.walletService.create({ userId });
   }
 
   @Get()
   // @UseGuards(AuthGuard('jwt'))
   async findAll(@Param('userId') userId: number) {
-    return this.walletService.findAll(userId);
+    return this.walletService.findAll({ userId });
   }
 }

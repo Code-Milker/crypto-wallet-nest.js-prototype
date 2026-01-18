@@ -1,33 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { Wallet, generateWallet, encryptPrivateKey } from '@shared/libs';
-import { MessagePattern } from '@nestjs/microservices';
+
 @Injectable()
 export class WalletService {
+  private readonly logger = new Logger(WalletService.name);
+
   constructor(
     @InjectRepository(Wallet)
     private walletsRepository: Repository<Wallet>,
     private httpService: HttpService,
     private configService: ConfigService,
   ) {}
-  @MessagePattern('create_wallet')
-  async create({
-    userId,
-  }: {
-    userId: number;
-  }): Promise<{ id: number; publicAddress: string }> {
+
+  async create(userId: number): Promise<{ id: number; publicAddress: string }> {
+    this.logger.log(`Creating wallet for userId: ${userId}`);
     const { publicAddress, privateKey } = generateWallet();
     const encryptedPrivateKey = encryptPrivateKey(privateKey);
+
     const wallet = this.walletsRepository.create({
       user: { id: userId },
       publicAddress,
-      encryptedPrivateKey, // Temp; we'll move to Key Storage
+      encryptedPrivateKey, // Temp store
     });
     const savedWallet = await this.walletsRepository.save(wallet);
+    this.logger.log(`Saved wallet ID: ${savedWallet.id}`);
+
     // Call Key Storage to store encrypted key
     const keyStorageUrl = this.configService.get('KEY_STORAGE_URL');
     await lastValueFrom(
@@ -35,15 +37,25 @@ export class WalletService {
         encryptedPrivateKey,
       }),
     );
-    // Optional: Remove encrypted key from DB after storage if not needed
-    await this.walletsRepository.update(savedWallet.id, {
-      encryptedPrivateKey: null,
-    });
+    this.logger.log(
+      `Key stored in Key Storage for wallet ID: ${savedWallet.id}`,
+    );
+
+    // Clear from DB using query builder to avoid missing values error
+    await this.walletsRepository
+      .createQueryBuilder()
+      .update(Wallet)
+      .set({ encryptedPrivateKey: null })
+      .where('id = :id', { id: savedWallet.id })
+      .execute();
+    this.logger.log(
+      `Cleared encrypted key from DB for wallet ID: ${savedWallet.id}`,
+    );
+
     return { id: savedWallet.id, publicAddress };
   }
-  @MessagePattern('list_wallets')
-  async findAll({ userId }: { userId: number }): Promise<Wallet[]> {
+
+  async findAll(userId: number): Promise<Wallet[]> {
     return this.walletsRepository.find({ where: { user: { id: userId } } });
   }
-  // Add findOne if needed
 }

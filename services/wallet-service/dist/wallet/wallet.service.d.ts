@@ -6,6 +6,7 @@ export declare class WalletService {
     private walletsRepository;
     private httpService;
     private configService;
+    private readonly logger;
     constructor(walletsRepository: Repository<Wallet>, httpService: HttpService, configService: ConfigService);
     create(userId: number): Promise<{
         id: number;
