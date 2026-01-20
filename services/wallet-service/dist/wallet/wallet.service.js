@@ -47,12 +47,6 @@ let WalletService = WalletService_1 = class WalletService {
             encryptedPrivateKey,
         }));
         this.logger.log(`Key stored in Key Storage for wallet ID: ${savedWallet.id}`);
-        await this.walletsRepository
-            .createQueryBuilder()
-            .update(libs_1.Wallet)
-            .set({ encryptedPrivateKey: null })
-            .where('id = :id', { id: savedWallet.id })
-            .execute();
         this.logger.log(`Cleared encrypted key from DB for wallet ID: ${savedWallet.id}`);
         return { id: savedWallet.id, publicAddress };
     }

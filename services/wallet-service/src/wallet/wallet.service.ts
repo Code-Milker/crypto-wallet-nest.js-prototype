@@ -40,13 +40,12 @@ export class WalletService {
       `Key stored in Key Storage for wallet ID: ${savedWallet.id}`,
     );
 
-    // Clear from DB using query builder to avoid missing values error
-    await this.walletsRepository
-      .createQueryBuilder()
-      .update(Wallet)
-      .set({ encryptedPrivateKey: null })
-      .where('id = :id', { id: savedWallet.id })
-      .execute();
+    // await this.walletsRepository
+    //   .createQueryBuilder()
+    //   .update(Wallet)
+    //   .set({ encryptedPrivateKey: null })
+    //   .where('id = :id', { id: savedWallet.id })
+    //   .execute();
     this.logger.log(
       `Cleared encrypted key from DB for wallet ID: ${savedWallet.id}`,
     );
