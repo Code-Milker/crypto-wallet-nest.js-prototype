@@ -21,10 +21,10 @@ let WalletController = class WalletController {
         this.walletService = walletService;
     }
     async create(userId) {
-        return this.walletService.create({ userId });
+        return this.walletService.create(userId);
     }
     async findAll(userId) {
-        return this.walletService.findAll({ userId });
+        return this.walletService.findAll(userId);
     }
 };
 exports.WalletController = WalletController;

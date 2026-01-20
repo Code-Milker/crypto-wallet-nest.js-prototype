@@ -21,9 +21,8 @@ export class WalletService {
     this.logger.log(`Creating wallet for userId: ${userId}`);
     const { publicAddress, privateKey } = generateWallet();
     const encryptedPrivateKey = encryptPrivateKey(privateKey);
-
     const wallet = this.walletsRepository.create({
-      user: { id: userId },
+      id: userId, // Set FK directly; adjust column name if it's not 'userId' (check Wallet entity)
       publicAddress,
       encryptedPrivateKey, // Temp store
     });

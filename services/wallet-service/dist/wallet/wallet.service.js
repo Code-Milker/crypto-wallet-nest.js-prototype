@@ -36,7 +36,7 @@ let WalletService = WalletService_1 = class WalletService {
         const { publicAddress, privateKey } = (0, libs_1.generateWallet)();
         const encryptedPrivateKey = (0, libs_1.encryptPrivateKey)(privateKey);
         const wallet = this.walletsRepository.create({
-            user: { id: userId },
+            id: userId,
             publicAddress,
             encryptedPrivateKey,
         });

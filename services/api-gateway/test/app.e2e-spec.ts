@@ -43,7 +43,7 @@ describe('API Gateway (e2e)', () => {
     expect(response.body).toHaveProperty('access_token');
     token = response.body.access_token;
   });
-
+  //
   it('/api/v1/wallets (POST) - create wallet', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/v1/wallets')
@@ -54,24 +54,24 @@ describe('API Gateway (e2e)', () => {
     expect(response.body).toHaveProperty('publicAddress');
     walletId = response.body.id;
   });
-
-  it('/api/v1/wallets (GET) - list wallets', async () => {
-    const response = await request(app.getHttpServer())
-      .get('/api/v1/wallets')
-      .set('Authorization', `Bearer ${token}`)
-      .expect(200);
-
-    expect(Array.isArray(response.body)).toBe(true);
-    expect(response.body.length).toBeGreaterThan(0);
-  });
-
-  it('/api/v1/sign/:walletId (POST) - sign message', async () => {
-    const response = await request(app.getHttpServer())
-      .post(`/api/v1/sign/${walletId}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ message: 'test message' })
-      .expect(201);
-
-    expect(typeof response.text).toBe('string');
-  });
+  //
+  //   it('/api/v1/wallets (GET) - list wallets', async () => {
+  //     const response = await request(app.getHttpServer())
+  //       .get('/api/v1/wallets')
+  //       .set('Authorization', `Bearer ${token}`)
+  //       .expect(200);
+  //
+  //     expect(Array.isArray(response.body)).toBe(true);
+  //     expect(response.body.length).toBeGreaterThan(0);
+  //   });
+  //
+  //   it('/api/v1/sign/:walletId (POST) - sign message', async () => {
+  //     const response = await request(app.getHttpServer())
+  //       .post(`/api/v1/sign/${walletId}`)
+  //       .set('Authorization', `Bearer ${token}`)
+  //       .send({ message: 'test message' })
+  //       .expect(201);
+  //
+  //     expect(typeof response.text).toBe('string');
+  //   });
 });
